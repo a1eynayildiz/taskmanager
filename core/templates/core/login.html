@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Giriş Yap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #333;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        .login-container p {
+            text-align: center;
+            margin-top: 16px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Giriş Yap</h2>
+        <form method="post" action="{% url 'login' %}?next={% url 'task_list' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <label for="id_username">Kullanıcı Adı</label>
+    {{ form.username }}
+
+    <label for="id_password">Şifre</label>
+    {{ form.password }}
+
+    <input type="hidden" name="next" value="{% url 'task_list' %}">
+
+    <button type="submit">Giriş Yap</button>
+</form>
+
+    </div>
+
+</body>
+</html>
