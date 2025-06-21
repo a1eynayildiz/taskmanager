@@ -30,6 +30,14 @@
     <div class="card">
         <h2 class="mb-3">{{ task.title }}</h2>
         <p><strong>📄 Açıklama:</strong> {{ task.description }}</p>
+        <p><strong>👤 Atayan:</strong>
+        {% if task.assigned_by %}
+          {{ task.assigned_by.username }}
+        {% else %}
+            (bilgi yok)
+        {% endif %}</p>
+
+        
         <p><strong>👤 Atanan Kullanıcı:</strong> {{ task.assigned_to.username }}</p>
         <p>
             <strong>📌 Durum:</strong>

@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 ROLES = (
+    ('user', 'User'),
     ('admin', 'Admin'),
     ('superadmin', 'Superadmin'),
-    ('user', 'User'),
 )
 
 class Profile(models.Model):

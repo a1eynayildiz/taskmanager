@@ -54,7 +54,7 @@
     </div>
 
     <div class="mb-4 text-end">
-    {% if request.user.profile.role == 'superadmin' %}
+    {% if request.user.profile.role == 'admin' or request.user.profile.role == 'superadmin' %}
         <a href="{% url 'task_create' %}" class="btn btn-primary">+ Yeni Görev Oluştur</a>
     {% endif %}
 </div>
@@ -79,6 +79,9 @@
                 </div>
                 <p class="mb-1">{{ task.description }}</p>
                 <small class="text-muted">Atanan: {{ task.assigned_to.username }}</small>
+                <br>
+                <small class="text-muted">Atayan: {{ task.assigned_by.username }}</small>
+
             </div>
         {% endfor %}
     {% else %}
