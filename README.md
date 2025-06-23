@@ -1,4 +1,4 @@
-# taskmanager
+# taskmanager https://a1eynayildiz.pythonanywhere.com/login/
 Projeyi ilk çalıştırdığınızda sizi bir login sayfası karşılıyor.
 ![image](https://github.com/user-attachments/assets/6d68f164-895a-40bc-b7d8-81ce97131c18)
 Gerekli bilgileri girip giriş yaptıktan sonra eğer superadmin iseniz atadığınız görevleri görebilir ve yeni görevler atayabilirsiniz.
