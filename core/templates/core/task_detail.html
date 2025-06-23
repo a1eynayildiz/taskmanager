@@ -1,25 +1,98 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Görev Detayı</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                url('https://www.transparenttextures.com/patterns/flowers.png') repeat,
+                #fff7e6;
+            background-size: 150px 150px;
+            min-height: 100vh;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            color: #7a4a00;
         }
         .container {
             max-width: 700px;
             margin-top: 60px;
         }
         .card {
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-            padding: 30px;
-            background-color: #fff;
+            border-radius: 14px;
+            box-shadow: 0 6px 15px rgba(255, 183, 77, 0.4);
+            padding: 30px 40px;
+            background-color: #fff3e0;
         }
-        .btn-back {
+        h2 {
+            color: #d35400;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        strong {
+            font-weight: 700;
+            color: #a85e00;
+        }
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .badge.bg-success {
+            background-color: #27ae60 !important;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 6px 12px;
+            border-radius: 10px;
+        }
+        .badge.bg-warning {
+            background-color: #f39c12 !important;
+            color: #4d3b00 !important;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 6px 12px;
+            border-radius: 10px;
+        }
+        .form-check-label {
+            font-size: 1.1rem;
+            color: #7a4a00;
+            user-select: none;
+        }
+        .form-check-input:checked {
+            background-color: #e67e22;
+            border-color: #e67e22;
+        }
+        .btn-primary {
+            background-color: #e67e22;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.5);
+            transition: background-color 0.3s ease;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #cf711f;
+            box-shadow: 0 6px 14px rgba(207, 113, 31, 0.6);
+        }
+        .btn-secondary {
+            background-color: #b97b00;
+            border: none;
+            font-weight: 600;
+            padding: 11px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
             margin-top: 20px;
+            display: inline-block;
+        }
+        .btn-secondary:hover {
+            background-color: #a16a00;
+        }
+        hr {
+            border-color: #f9d79c;
+            margin: 25px 0;
         }
     </style>
 </head>
@@ -28,7 +101,7 @@
 <div class="container">
 
     <div class="card">
-        <h2 class="mb-3">{{ task.title }}</h2>
+        <h2>{{ task.title }}</h2>
         <p><strong>📄 Açıklama:</strong> {{ task.description }}</p>
         <p><strong>👤 Atayan:</strong>
         {% if task.assigned_by %}
@@ -37,7 +110,6 @@
             (bilgi yok)
         {% endif %}</p>
 
-        
         <p><strong>👤 Atanan Kullanıcı:</strong> {{ task.assigned_to.username }}</p>
         <p>
             <strong>📌 Durum:</strong>
@@ -63,7 +135,7 @@
             <button type="submit" class="btn btn-primary">Güncelle</button>
         </form>
 
-        <a href="{% url 'task_list' %}" class="btn btn-secondary btn-back">← Görev Listesine Dön</a>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">← Görev Listesine Dön</a>
     </div>
 
 </div>

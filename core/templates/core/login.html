@@ -6,83 +6,121 @@
     <title>Giriş Yap</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+              url('https://www.transparenttextures.com/patterns/flowers.png') repeat,
+              #fff7e6; /* Açık krem arka plan */
+            background-size: 150px 150px;
+            animation: moveBackground 30s linear infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative;
         }
+
+        @keyframes moveBackground {
+            0% {
+                background-position: 0 0, 0 0;
+            }
+            100% {
+                background-position: 150px 150px, 0 0;
+            }
+        }
+
         .login-container {
-            background: #fff;
+            background: #fff3e0; /* Hafif turuncu-krem kutu */
             padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 14px;
+            box-shadow: 0 5px 15px rgba(255, 183, 77, 0.4);
             width: 100%;
             max-width: 400px;
+            position: relative;
+        }
+        .flower-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 32px;
+            opacity: 0.25;
+            pointer-events: none;
+            user-select: none;
         }
         .login-container h2 {
             text-align: center;
             margin-bottom: 24px;
-            color: #333;
+            color: #d35400; /* Sıcak turuncu */
+            font-weight: 700;
         }
         .login-container label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
+            color: #a85e00;
+            font-weight: 600;
         }
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1.5px solid #f9d79c;
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 16px;
+            background-color: #fff8f0;
+            color: #7a4a00;
+            transition: border-color 0.3s ease;
+        }
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #e67e22;
+            outline: none;
+            background-color: #fff3e3;
         }
         .login-container button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background-color: #e67e22;
             border: none;
             color: white;
             font-size: 16px;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.5);
         }
         .login-container button:hover {
-            background-color: #45a049;
+            background-color: #cf711f;
+            box-shadow: 0 6px 14px rgba(207, 113, 31, 0.6);
         }
         .login-container p {
             text-align: center;
             margin-top: 16px;
-            color: #777;
+            color: #b97b00;
         }
     </style>
 </head>
 <body>
 
     <div class="login-container">
+        <div class="flower-icon">🌸</div>
         <h2>Giriş Yap</h2>
         <form method="post" action="{% url 'login' %}?next={% url 'task_list' %}">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-    <label for="id_username">Kullanıcı Adı</label>
-    {{ form.username }}
+            <label for="id_username">Kullanıcı Adı</label>
+            {{ form.username }}
 
-    <label for="id_password">Şifre</label>
-    {{ form.password }}
+            <label for="id_password">Şifre</label>
+            {{ form.password }}
 
-    <input type="hidden" name="next" value="{% url 'task_list' %}">
+            <input type="hidden" name="next" value="{% url 'task_list' %}">
 
-    <button type="submit">Giriş Yap</button>
-</form>
-
+            <button type="submit">Giriş Yap</button>
+        </form>
     </div>
 
 </body>

@@ -8,9 +8,8 @@ def redirect_to_login(request):
 
 urlpatterns = [
     path('', redirect_to_login),  # Anasayfa login sayfasına yönlendirilecek
-    path('tasks/', views.task_list, name='task_list'),  # task_list farklı bir URL oldu
+    path('tasks/', views.task_list, name='task_list'), 
     path('task/create/', views.task_create, name='task_create'),
-
     path('task/<int:pk>/', views.task_detail, name='task_detail'),
 
     # Login & Logout

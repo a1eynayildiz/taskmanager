@@ -1,41 +1,95 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Görev Listesi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
-            background-color: #f1f3f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                url('https://www.transparenttextures.com/patterns/flowers.png') repeat,
+                #fff7e6;
+            background-size: 150px 150px;
+            min-height: 100vh;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            color: #7a4a00;
         }
         .container {
             max-width: 900px;
             margin-top: 60px;
+            background: #fff3e0;
+            border-radius: 14px;
+            padding: 30px 40px;
+            box-shadow: 0 5px 15px rgba(255, 183, 77, 0.4);
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            color: #a85e00;
+        }
+        .header h2 {
+            font-weight: 700;
+        }
+        .btn-primary {
+            background-color: #e67e22;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.5);
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #cf711f;
+            box-shadow: 0 6px 14px rgba(207, 113, 31, 0.6);
+        }
+        .btn-outline-danger {
+            border-color: #d35400;
+            color: #d35400;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-danger:hover {
+            background-color: #d35400;
+            color: #fff;
         }
         .task-card {
-            border-radius: 10px;
+            border-radius: 14px;
             margin-bottom: 20px;
-            border: 1px solid #dee2e6;
-            background-color: #fff;
+            border: 1.5px solid #f9d79c;
+            background-color: #fff8f0;
+            padding: 20px 25px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .task-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 16px rgba(230, 126, 34, 0.25);
         }
         .status-completed {
-            color: green;
-            font-weight: 600;
+            color: #27ae60;
+            font-weight: 700;
         }
         .status-inprogress {
-            color: orange;
-            font-weight: 600;
+            color: #f39c12;
+            font-weight: 700;
+        }
+        h5 a {
+            color: #7a4a00;
+            transition: color 0.3s ease;
+        }
+        h5 a:hover {
+            color: #d35400;
+            text-decoration: underline;
+        }
+        p {
+            color: #7a4a00;
+        }
+        small.text-muted {
+            color: #a85e00 !important;
         }
     </style>
 </head>
@@ -47,9 +101,9 @@
         <div>
             Hoşgeldin, <strong>{{ request.user.username }}</strong> 
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger btn-sm">Çıkış</button>
-        </form>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger btn-sm">Çıkış</button>
+            </form>
         </div>
     </div>
 
@@ -57,15 +111,14 @@
     {% if request.user.profile.role == 'admin' or request.user.profile.role == 'superadmin' %}
         <a href="{% url 'task_create' %}" class="btn btn-primary">+ Yeni Görev Oluştur</a>
     {% endif %}
-</div>
-
+    </div>
 
     {% if tasks %}
         {% for task in tasks %}
-            <div class="task-card p-4">
+            <div class="task-card">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h5 class="mb-0">
-                        <a href="{% url 'task_detail' task.pk %}" class="text-decoration-none text-dark">
+                        <a href="{% url 'task_detail' task.pk %}" class="text-decoration-none">
                             {{ task.title }}
                         </a>
                     </h5>
@@ -81,11 +134,12 @@
                 <small class="text-muted">Atanan: {{ task.assigned_to.username }}</small>
                 <br>
                 <small class="text-muted">Atayan: {{ task.assigned_by.username }}</small>
-
             </div>
         {% endfor %}
     {% else %}
-        <div class="alert alert-info text-center">Şu anda görüntülenecek görev bulunmamaktadır.</div>
+        <div class="alert alert-info text-center" style="background-color:#fff3e0; color:#d35400; border:1.5px solid #f9d79c; border-radius:8px;">
+            Şu anda görüntülenecek görev bulunmamaktadır.
+        </div>
     {% endif %}
 </div>
 

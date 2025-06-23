@@ -3,10 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from .models import Task, Profile
 from django.contrib.auth.models import User
-
-
 from django.contrib.auth import logout
-from django.shortcuts import redirect
+
 
 def custom_logout(request):
     logout(request)
