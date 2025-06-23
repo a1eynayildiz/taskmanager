@@ -28,10 +28,7 @@ def task_list(request):
             assigned_to=request.user
         )
 
-    elif profile.role == 'supervisor':
-        tasks = Task.objects.filter(
-            assigned_to=request.user
-        ) | Task.objects.filter(assigned_by=request.user)
+    
 
     else:
         tasks = Task.objects.filter(assigned_to=request.user)
