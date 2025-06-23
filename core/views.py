@@ -16,14 +16,29 @@ def custom_logout(request):
 def task_list(request):
     profile = request.user.profile
 
-    if profile.role == 'superadmin' or profile.role == 'admin':
+    if profile.role == 'superadmin':
         tasks = Task.objects.all()
+
+    elif profile.role == 'admin':
+        # Kendi atadığı user görevleri + kendisine atanan görevler
+        tasks = Task.objects.filter(
+            assigned_by=request.user,
+            assigned_to__profile__role='user'
+        ) | Task.objects.filter(
+            assigned_to=request.user
+        )
+
     elif profile.role == 'supervisor':
-        tasks = Task.objects.filter(assigned_to__profile__role='user') | Task.objects.filter(assigned_by=request.user)
+        tasks = Task.objects.filter(
+            assigned_to=request.user
+        ) | Task.objects.filter(assigned_by=request.user)
+
     else:
-        tasks = Task.objects.filter(assigned_to=request.user) | Task.objects.filter(assigned_by=request.user)
+        tasks = Task.objects.filter(assigned_to=request.user)
 
     return render(request, 'core/task_list.html', {'tasks': tasks})
+
+
 
 
 @login_required
